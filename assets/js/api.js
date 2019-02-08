@@ -4,6 +4,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
     var jsonURL = "https://jsonplaceholder.typicode.com/todos/1";
     var jsonResponse;
 
+    var jsonCityURL = "assets/json/cityList.json";
+    //var jsonCityResponse = JSON.parse(cityList);
+    
     xmlhttp.onreadystatechange = function() {
         if (xmlhttp.readyState== 4 && xmlhttp.status== 200) {
             jsonResponse = xmlhttp.responseText;
@@ -13,6 +16,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
     xmlhttp.open("GET", jsonURL, true);
     xmlhttp.send();
+
+    //printConsole(cityList);
 });
 
 // Print text to console.
