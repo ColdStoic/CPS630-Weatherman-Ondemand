@@ -86,17 +86,6 @@ nav li a:hover {
 
     border: 2px solid #cdcecf;
 }
-.daily-days-container {
-    display: flex;
-    width: 100%;
-
-    border: 2px solid #cdcecf;
-}
-.daily-days {
-    width: 20%;
-
-    border: 2px solid #cdcecf;
-}
 
 #daily-location {
     text-align: center;
@@ -112,6 +101,50 @@ nav li a:hover {
     font-size: 30px;
 }
 
+.daily-days-container {
+    display: flex;
+    width: 100%;
+
+    border: 2px solid #cdcecf;
+}
+.daily-days {
+    width: 20%;
+
+    display: flex;
+    flex-flow: row wrap;
+    padding: 10px;
+
+    border: 2px solid #cdcecf;
+}
+.daily-day {
+    width: 100%;
+    display: flex;
+    justify-content: center; /* align horizontal */
+    align-items: center; /* align vertical */
+}
+.daily-icon {
+    width: 100%;
+    display: flex;
+    justify-content: center; /* align horizontal */
+    align-items: center; /* align vertical */
+}
+.daily-temp {
+    width: 100%;
+    display: flex;
+    flex-flow: row wrap;
+}
+.daily-temp-low {
+    width: 50%;
+    display: flex;
+    justify-content: center; /* align horizontal */
+    align-items: center; /* align vertical */
+}
+.daily-temp-high {
+    width: 50%;
+    display: flex;
+    justify-content: center; /* align horizontal */
+    align-items: center; /* align vertical */
+}
 
 /* Panel Container */
 .panel-container {

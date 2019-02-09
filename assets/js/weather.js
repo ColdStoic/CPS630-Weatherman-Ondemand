@@ -30,6 +30,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
             console.log("Json Forecast", jsonForecast);
 
             getWeather();
+            setDaily();
             
             console.log("Length", Object.keys(jsonForecast.list).length);
             console.log("Daily", fiveDayDaily);
@@ -82,5 +83,14 @@ function getWeather() {
                 return forecast.dt_txt.includes(dateString)
             }
         ));
+    }
+}
+
+function setDaily() {
+    var dailyDays = document.getElementsByClassName("daily-days");
+    console.log("Daily Days: ", dailyDays);
+
+    for(i = 1; i < dailyDays.length; i++) {
+        dailyDays[i].innerHTML = i;
     }
 }
