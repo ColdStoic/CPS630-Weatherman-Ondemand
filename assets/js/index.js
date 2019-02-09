@@ -2,7 +2,8 @@
 function searchHandler() {
     //localStorage.setItem("locationName", document.getElementById("search-location").value);
     var searchLocation = document.getElementById("search-location").value;
-    localStorage.setItem("locationId", getIdByLocation(searchLocation));
+    localStorage.setItem("locationId", getSliceByLocation(searchLocation).id);
+    localStorage.setItem("locationName", getSliceByLocation(searchLocation).name);
     window.location.href = "weather.html";
 }
 
@@ -13,10 +14,10 @@ function toUpperFirst(str) {
 }
 
 // Gets slice of location from city list.
-function getIdByLocation(country) {
+function getSliceByLocation(country) {
     return cityList.filter(
         function(cityList) {
             return cityList.name == country
         }
-    )[0].id;
+    )[0];
 }
