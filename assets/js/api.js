@@ -1,11 +1,13 @@
 // Global Variables.
 var jsonResponse;
-var d = new Date();
+var date = new Date();
 
 // Onload.
 document.addEventListener("DOMContentLoaded", function(event) {
     var xmlhttp = new XMLHttpRequest();
     var jsonURL = "";
+
+    document.getElementById("text-output").innerHTML = localStorage.getItem("location");
 
     // fires when response is recieved.
     xmlhttp.onreadystatechange = function() {
@@ -19,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     }
 
     var ID = getSliceByLocation("Toronto").id;
-    jsonURL = getApiUrl(ID);
+    jsonURL = getApiUrl(ID, "metric");
 
     xmlhttp.open("GET", jsonURL, true);
     xmlhttp.send();
@@ -27,8 +29,14 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 // Search bar handler.
 function searchHandler() {
-    var x = document.getElementById("search-input").value;
-    document.getElementById("text-output").innerHTML = x;
+    localStorage.setItem("location", document.getElementById("search-input").value);
+    window.location.href = "weather.html";
+}
+
+// Upper First.
+// Capitalizes the first letters of each word in a string.
+function toUpperFirst(str) {
+    return str.toLowerCase().split(' ').map((s) => s.charAt(0).toUpperCase() + s.substring(1)).join(' ');
 }
 
 // Gets slice of location from city list.
@@ -40,21 +48,16 @@ function getSliceByLocation(country) {
     )[0];
 }
 
-// Upper First.
-// Capitalizes the first letters of each word in a string.
-function toUpperFirst(str) {
-    return str.toLowerCase().split(' ').map((s) => s.charAt(0).toUpperCase() + s.substring(1)).join(' ');
+// API Call.
+function getApiUrl(id, unit) {
+    return "https://api.openweathermap.org/data/2.5/forecast?id=" + id + "&units=" + unit + "&APPID=4c06bfe661f0b300a0f60bc62534ad7d";
 }
 
-function getApiUrl(id) {
-    return "https://api.openweathermap.org/data/2.5/forecast?id=" + id + "&units=metric" + "&APPID=4c06bfe661f0b300a0f60bc62534ad7d";
-}
-
-// Five Day Daily
+// Five Day Daily.
 // Gets an array with a single slice for each day.
 function getFiveDayDaily() {
     var forecast = jsonResponse.list
-    var day = d.getDate()
+    var day = date.getDate()
     var forecastDaily = [];
 
     for (i = day; i < (day + 5); i++) {
