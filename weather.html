@@ -13,7 +13,7 @@
             <div class="container">
                 <!-- Title -->
                 <div class="break"></div>
-                <h1>The<br/>Weatherman<br/>Ondemand</h1>
+                <h1>The<br/>Weatherman Ondemand</h1>
                 <div class="break"></div>
 
                 <!-- Main Container -->
@@ -22,7 +22,8 @@
                     <div class="daily-container">
                         <div id="daily-location"></div>
                         <i id="daily-icon" class="wi wi-day-sunny"></i>
-                        <div id="daily-temperature"></div>
+                        <div id="daily-temp"></div>
+                        <div id="daily-desc"></div>
                         <div id="daily-date"></div>
                         <br/>
 
@@ -30,7 +31,7 @@
                         <div class="daily-days-container">
                             <div class="daily-days">
                                 <div class="daily-day"></div>
-                                <i class="daily-day-icon wi wi-day-sunny wi-flip-vertical"></i>
+                                <i class="daily-day-icon wi wi-day-sunny"></i>
                                 <div class="daily-day-temp">
                                     <div class="daily-day-temp-low"></div>
                                     <div class="daily-day-temp-high"></div>
@@ -38,7 +39,7 @@
                             </div>
                             <div class="daily-days">
                                 <div class="daily-day"></div>
-                                <i class="daily-day-icon wi wi-day-sunny wi-flip-vertical"></i>
+                                <i class="daily-day-icon wi wi-day-sunny"></i>
                                 <div class="daily-day-temp">
                                     <div class="daily-day-temp-low"></div>
                                     <div class="daily-day-temp-high"></div>
@@ -46,7 +47,7 @@
                             </div>
                             <div class="daily-days">
                                 <div class="daily-day"></div>
-                                <i class="daily-day-icon wi wi-day-sunny wi-flip-vertical"></i>
+                                <i class="daily-day-icon wi wi-day-sunny"></i>
                                 <div class="daily-day-temp">
                                     <div class="daily-day-temp-low"></div>
                                     <div class="daily-day-temp-high"></div>
@@ -54,7 +55,7 @@
                             </div>
                             <div class="daily-days">
                                 <div class="daily-day"></div>
-                                <i class="daily-day-icon wi wi-day-sunny wi-flip-vertical"></i>
+                                <i class="daily-day-icon wi wi-day-sunny"></i>
                                 <div class="daily-day-temp">
                                     <div class="daily-day-temp-low"></div>
                                     <div class="daily-day-temp-high"></div>
@@ -62,7 +63,7 @@
                             </div>
                             <div class="daily-days">
                                 <div class="daily-day"></div>
-                                <i class="daily-day-icon wi wi-day-sunny wi-flip-vertical"></i>
+                                <i class="daily-day-icon wi wi-day-sunny"></i>
                                 <div class="daily-day-temp">
                                     <div class="daily-day-temp-low"></div>
                                     <div class="daily-day-temp-high"></div>
@@ -71,17 +72,65 @@
                         </div>
                     </div>
 
-                    <!-- Widget Panels -->
+                    <!-- Weather Panels -->
                     <div class="panel-container">
-                        <div class="panel">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium, hic possimus commodi enim obcaecati iste soluta amet natus pariatur error eum perferendis aut repellat accusamus ratione labore atque quaerat aliquid.</div>
+                        <div class = "panel">
+                            <i class="panel-icon wi wi-cloud"></i>
+                            <div>Clouds</div>
+                            <div class="panel-info">
+                                <div id="panel-clouds">80%</div>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="panel-container">
-                        <div class="panel">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium, hic possimus commodi enim obcaecati iste soluta amet natus pariatur error eum perferendis aut repellat accusamus ratione labore atque quaerat aliquid.</div>
+                        <div class = "panel">
+                            <i class="panel-icon wi wi-umbrella"></i>
+                            <div>Rain</div>
+                            <div class="panel-info">
+                                <div id="panel-rain"></div>
+                            </div>
+                        </div>
+                    </div >
+
+                    <div class="panel-container">
+                        <div class = "panel">
+                            <i class="panel-icon wi wi-snowflake-cold"></i>
+                            <div>Snow</div>
+                            <div class="panel-info">
+                                <div id="panel-snow"></div>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="panel-container">
-                        <div class="panel">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium, hic possimus commodi enim obcaecati iste soluta amet natus pariatur error eum perferendis aut repellat accusamus ratione labore atque quaerat aliquid.</div>
+                        <div class = "panel">
+                            <i class="panel-icon wi wi-strong-wind"></i>
+                            <div>Wind</div>
+                            <div class="panel-info">
+                                <div id="panel-wind"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel-container">
+                        <div class = "panel">
+                            <i class="panel-icon wi wi-humidity"></i>
+                            <div>Humidity</div>
+                            <div class="panel-info">
+                                <div id="panel-humidity"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel-container">
+                        <div class = "panel">
+                            <i class="panel-icon wi wi-barometer"></i>
+                            <div>Pressure</div>
+                            <div class="panel-info">
+                                <div id="panel-pressure"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

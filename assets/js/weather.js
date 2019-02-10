@@ -59,9 +59,10 @@ function getWeatherApiUrl(id, unit) {
 function onCallsReady() {
     getWeather();
     setDaily();
-    
+
     document.getElementById("daily-location").innerHTML = jsonWeather.name;
-    document.getElementById("daily-temperature").innerHTML = jsonWeather.main.temp;
+    document.getElementById("daily-temp").innerHTML = jsonWeather.main.temp + '<i class="wi wi-celsius"></i>';
+    document.getElementById("daily-desc").innerHTML = toUpperFirst(jsonWeather.weather[0].description);
     document.getElementById("daily-date").innerHTML = date.getUTCDate();
 
     console.log("Json Weather", jsonWeather);
@@ -108,4 +109,10 @@ function setDaily() {
         dailyDays[i].getElementsByClassName("daily-day-temp-low")[0].innerHTML = fiveDayDaily[i].main.temp_min;
         dailyDays[i].getElementsByClassName("daily-day-temp-high")[0].innerHTML = fiveDayDaily[i].main.temp_max;
     }
+}
+
+// Upper First.
+// Capitalizes the first letters of each word in a string.
+function toUpperFirst(str) {
+    return str.toLowerCase().split(' ').map((s) => s.charAt(0).toUpperCase() + s.substring(1)).join(' ');
 }

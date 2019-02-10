@@ -26,6 +26,7 @@ html, body, main {
 .container-main {
     display: flex;
     flex-flow: row wrap;
+    justify-content: center; /* centers all content (widgets) */
 
     border: 1px solid #cdcecf;
 }
@@ -33,7 +34,6 @@ html, body, main {
 /* Daily Forecasts */
 .daily-container {
     margin: 0px;
-    padding-top: 15px;
     width: 100%;
     height: 100%;
 
@@ -41,23 +41,30 @@ html, body, main {
 }
 
 #daily-location {
+    margin-top: 35px;
+    margin-bottom: 15px;
     text-align: center;
     font-size: 40px;
 }
-#daily-temperature {
+#daily-icon {
+    width: 100%;
+    font-size: 80px;
+    text-align: center;
+}
+#daily-temp {
+    margin: 15px 0px;
     text-align: center;
     font-size: 50px;
     font-weight: bold;
 }
+#daily-desc {
+    text-align: center;
+    font-size: 40px;
+}
 #daily-date {
+    margin: 15px 0px;
     text-align: center;
     font-size: 30px;
-}
-#daily-icon {
-    margin: 15px 0px;
-    width: 100%;
-    font-size: 80px;
-    text-align: center;
 }
 
 /* Daily Days (5 day) Panels */
@@ -113,21 +120,6 @@ html, body, main {
 
     border: 1px solid #cdcecf;
 }
-/*  Main Article Image */
-.panel-container div img {
-    max-width: 100%;
-}
-/* Main Article Title Header */
-.panel-container .title {
-    display: table-cell;
-    word-wrap: break-word;
-    padding: 10px;
-    width: 100%;
-    margin: 0px;
-    font-size: 16px;
-    font-weight: bold;
-}
-
 .panel:hover {
     transform: scale(1.05);
 }
@@ -142,18 +134,29 @@ html, body, main {
     border: 1px solid #cdcecf;
     border-radius: 1px;
     transition: all 200ms;
+
+    display: flex;
+    align-items: center; /* Vertical center alignment */
+    justify-content: center; /* Horizontal center alignment */
+    font-size: 20px;
 }
-/* Main Article Description */
-.panel-desc {
-    padding: 0px 10px;
-    font-size: 14px;
-    color: darkslategrey;
+.panel-icon {
+    width: 50%;
+    margin: 15px;
+    font-size: 40px;
+    text-align: center;
 }
-/* Main Article Author */
-.panel-author {
-    padding: 7px 0px 10px 10px;
-    font-size: 12px;
-    color: darkslategrey;
+.panel-info {
+    font-weight: bold;
+    width: 100%;
+    display: flex;
+    /* flex-direction: column; */
+}
+.panel-info div {
+    display:flex;
+    align-items: center; /* Vertical center alignment */
+    justify-content: center; /* Horizontal center alignment */
+    width: 100%;
 }
 
 /* Footer */
