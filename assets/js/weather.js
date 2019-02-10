@@ -1,6 +1,6 @@
 // Global Variables.
-var jsonForecast;
-var jsonWeather;
+var jsonForecast = null;
+var jsonWeather = null;
 var fiveDayDaily = [];
 var fiveDayForcast = [];
 var date = new Date();
@@ -15,11 +15,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
     xmlhttp1.onreadystatechange = function() {
         if (xmlhttp1.readyState== 4 && xmlhttp1.status== 200) {
             jsonWeather = JSON.parse(xmlhttp1.responseText);
-            console.log("Json Weather", jsonWeather);
 
-            document.getElementById("daily-location").innerHTML = jsonWeather.name;
-            document.getElementById("daily-temperature").innerHTML = jsonWeather.main.temp;
-            document.getElementById("daily-date").innerHTML = date.getUTCDate();
+            if (jsonForecast != null) {
+                onCallsReady();
+            }
         }
     }
 
@@ -27,15 +26,11 @@ document.addEventListener("DOMContentLoaded", function(event) {
     xmlhttp2.onreadystatechange = function() {
         if (xmlhttp2.readyState== 4 && xmlhttp2.status== 200) {
             jsonForecast = JSON.parse(xmlhttp2.responseText);
-            console.log("Json Forecast", jsonForecast);
 
-            getWeather();
-            setDaily();
-            
-            console.log("Length", Object.keys(jsonForecast.list).length);
-            console.log("Daily", fiveDayDaily);
-            console.log("Forecast", fiveDayForcast);
-        }
+            if (jsonWeather != null) {
+                onCallsReady();
+            }
+        }  
     }
 
     //document.getElementById("text-output").innerHTML = localStorage.getItem("location");
@@ -61,17 +56,31 @@ function getForecastApiUrl(id, unit) {
 function getWeatherApiUrl(id, unit) {
     return "https://api.openweathermap.org/data/2.5/weather?id=" + id + "&units=" + unit + "&APPID=4c06bfe661f0b300a0f60bc62534ad7d";
 }
+function onCallsReady() {
+    getWeather();
+    setDaily();
+    
+    document.getElementById("daily-location").innerHTML = jsonWeather.name;
+    document.getElementById("daily-temperature").innerHTML = jsonWeather.main.temp;
+    document.getElementById("daily-date").innerHTML = date.getUTCDate();
+
+    console.log("Json Weather", jsonWeather);
+    console.log("Json Forecast", jsonForecast);
+
+    console.log("Length", Object.keys(jsonForecast.list).length);
+    console.log("Daily", fiveDayDaily);
+    console.log("Forecast", fiveDayForcast);
+}
 
 // Get Weather
 // Parses data for daily and forecast arrays.
 function getWeather() {
     var forecast = jsonForecast.list
     var day = date.getDate()
-    var forecastDaily = [];
 
     for (i = day; i < (day + 5); i++) {
         var dateString = "2019-02-" + (('0' + i).slice(-2));
-        //console.log(dateString);
+        // console.log(dateString);
         fiveDayDaily.push(forecast.filter(
             function(forecast) {
                 return forecast.dt_txt.includes(dateString)
@@ -88,9 +97,15 @@ function getWeather() {
 
 function setDaily() {
     var dailyDays = document.getElementsByClassName("daily-days");
-    console.log("Daily Days: ", dailyDays);
+
+    dailyDays[0].getElementsByClassName("daily-day")[0].innerHTML = jsonWeather.dt;
+    dailyDays[0].getElementsByClassName("daily-temp-low")[0].innerHTML = jsonWeather.main.temp_min;
+    dailyDays[0].getElementsByClassName("daily-temp-high")[0].innerHTML = jsonWeather.main.temp_max;
 
     for(i = 1; i < dailyDays.length; i++) {
-        dailyDays[i].innerHTML = i;
+        dailyDays[i].getElementsByClassName("daily-day")[0].innerHTML = fiveDayDaily[i].dt;
+        // document.getElementById("MyElement").classList.add('MyClass');
+        dailyDays[i].getElementsByClassName("daily-temp-low")[0].innerHTML = fiveDayDaily[i].main.temp_min;
+        dailyDays[i].getElementsByClassName("daily-temp-high")[0].innerHTML = fiveDayDaily[i].main.temp_max;
     }
 }

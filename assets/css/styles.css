@@ -124,9 +124,10 @@ nav li a:hover {
 }
 .daily-icon {
     width: 100%;
+    margin: 15px;
+    font-size: 50px;
     display: flex;
-    justify-content: center; /* align horizontal */
-    align-items: center; /* align vertical */
+    text-align: center;
 }
 .daily-temp {
     width: 100%;
