@@ -3,7 +3,10 @@ var jsonForecast = null;
 var jsonWeather = null;
 var fiveDayDaily = [];
 var fiveDayForcast = [];
+
 var date = new Date();
+var days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
 
 // Onload.
 document.addEventListener("DOMContentLoaded", function(event) {
@@ -60,10 +63,28 @@ function onCallsReady() {
     getWeather();
     setDaily();
 
+    /* Daily Main */
     document.getElementById("daily-location").innerHTML = jsonWeather.name;
     document.getElementById("daily-temp").innerHTML = jsonWeather.main.temp + '<i class="wi wi-celsius"></i>';
     document.getElementById("daily-desc").innerHTML = toUpperFirst(jsonWeather.weather[0].description);
-    document.getElementById("daily-date").innerHTML = date.getUTCDate();
+    document.getElementById("daily-date").innerHTML = getDateString(jsonWeather.dt);
+
+    /* Panels */
+    document.getElementById("panel-clouds").innerHTML = jsonWeather.clouds.all;
+    if (jsonWeather.hasOwnProperty('rain')) {
+        document.getElementById("panel-rain").innerHTML = jsonWeather.rain.myObject["1h"] + "mm";
+    } else {
+        document.getElementById("panel-rain").innerHTML = "0mm"
+    }
+    if (jsonWeather.hasOwnProperty('snow')) {  
+        document.getElementById("panel-snow").innerHTML = jsonWeather.snow.myObject["1h"] + "mm";
+    } else {
+        document.getElementById("panel-snow").innerHTML = "0mm"
+    }
+    document.getElementById("panel-wind-speed").innerHTML = jsonWeather.wind.speed + "m/s";
+    document.getElementById("panel-wind-dir").innerHTML = jsonWeather.wind.deg + "°";
+    document.getElementById("panel-pressure").innerHTML = jsonWeather.main.pressure + "hPa";
+    document.getElementById("panel-humidity").innerHTML = jsonWeather.main.humidity + "%";
 
     console.log("Json Weather", jsonWeather);
     console.log("Json Forecast", jsonForecast);
@@ -99,16 +120,33 @@ function getWeather() {
 function setDaily() {
     var dailyDays = document.getElementsByClassName("daily-days");
 
-    dailyDays[0].getElementsByClassName("daily-day")[0].innerHTML = jsonWeather.dt;
+    dailyDays[0].getElementsByClassName("daily-day")[0].innerHTML = getWeekday(jsonWeather.dt);
     dailyDays[0].getElementsByClassName("daily-day-temp-low")[0].innerHTML = jsonWeather.main.temp_min;
     dailyDays[0].getElementsByClassName("daily-day-temp-high")[0].innerHTML = jsonWeather.main.temp_max;
 
     for(i = 1; i < dailyDays.length; i++) {
-        dailyDays[i].getElementsByClassName("daily-day")[0].innerHTML = fiveDayDaily[i].dt;
+        dailyDays[i].getElementsByClassName("daily-day")[0].innerHTML = getWeekday(fiveDayDaily[i].dt);
         // document.getElementById("MyElement").classList.add('MyClass');
         dailyDays[i].getElementsByClassName("daily-day-temp-low")[0].innerHTML = fiveDayDaily[i].main.temp_min;
         dailyDays[i].getElementsByClassName("daily-day-temp-high")[0].innerHTML = fiveDayDaily[i].main.temp_max;
     }
+}
+
+function getDateString(timestamp) {
+    var dateObj = new Date(timestamp*1000)
+    var day = dateObj.getDate();
+    var month = months[dateObj.getMonth()];
+    var year = dateObj.getFullYear();
+
+    var dateString = day + " " + month + ", " + year;
+    return dateString
+}
+
+function getWeekday(timestamp) {
+    var dateObj = new Date(timestamp*1000)
+    var day = days[dateObj.getDay()];
+
+    return day
 }
 
 // Upper First.
