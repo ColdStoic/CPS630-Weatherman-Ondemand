@@ -54,11 +54,10 @@ html, body, main {
     font-size: 30px;
 }
 #daily-icon {
-    margin: 15px;
-    font-size: 50px;
-    position: relative;
-    left: 50%;
-    transform: translate(-40px, 0%);
+    margin: 15px 0px;
+    width: 100%;
+    font-size: 80px;
+    text-align: center;
 }
 
 /* Daily Days (5 day) Panels */
@@ -87,7 +86,6 @@ html, body, main {
     width: 100%;
     margin: 15px;
     font-size: 40px;
-    /* display: flex; */
     text-align: center;
 }
 .daily-day-temp {
