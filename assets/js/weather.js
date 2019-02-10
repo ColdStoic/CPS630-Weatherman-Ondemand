@@ -99,13 +99,13 @@ function setDaily() {
     var dailyDays = document.getElementsByClassName("daily-days");
 
     dailyDays[0].getElementsByClassName("daily-day")[0].innerHTML = jsonWeather.dt;
-    dailyDays[0].getElementsByClassName("daily-temp-low")[0].innerHTML = jsonWeather.main.temp_min;
-    dailyDays[0].getElementsByClassName("daily-temp-high")[0].innerHTML = jsonWeather.main.temp_max;
+    dailyDays[0].getElementsByClassName("daily-day-temp-low")[0].innerHTML = jsonWeather.main.temp_min;
+    dailyDays[0].getElementsByClassName("daily-day-temp-high")[0].innerHTML = jsonWeather.main.temp_max;
 
     for(i = 1; i < dailyDays.length; i++) {
         dailyDays[i].getElementsByClassName("daily-day")[0].innerHTML = fiveDayDaily[i].dt;
         // document.getElementById("MyElement").classList.add('MyClass');
-        dailyDays[i].getElementsByClassName("daily-temp-low")[0].innerHTML = fiveDayDaily[i].main.temp_min;
-        dailyDays[i].getElementsByClassName("daily-temp-high")[0].innerHTML = fiveDayDaily[i].main.temp_max;
+        dailyDays[i].getElementsByClassName("daily-day-temp-low")[0].innerHTML = fiveDayDaily[i].main.temp_min;
+        dailyDays[i].getElementsByClassName("daily-day-temp-high")[0].innerHTML = fiveDayDaily[i].main.temp_max;
     }
 }
