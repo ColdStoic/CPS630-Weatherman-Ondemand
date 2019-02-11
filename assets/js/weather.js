@@ -237,12 +237,12 @@ function setWeather(day) {
         /* Panels */
         document.getElementById("panel-clouds").innerHTML = jsonWeather.clouds.all + "%";
         if (jsonWeather.hasOwnProperty('rain')) {
-            document.getElementById("panel-rain").innerHTML = jsonWeather.rain.myObject["1h"] + "mm";
+            document.getElementById("panel-rain").innerHTML = jsonWeather.rain.myObject["3h"] + "mm";
         } else {
             document.getElementById("panel-rain").innerHTML = "0mm"
         }
         if (jsonWeather.hasOwnProperty('snow')) {  
-            document.getElementById("panel-snow").innerHTML = jsonWeather.snow.myObject["1h"] + "mm";
+            document.getElementById("panel-snow").innerHTML = jsonWeather.snow.myObject["3h"] + "mm";
         } else {
             document.getElementById("panel-snow").innerHTML = "0mm"
         }
