@@ -6,7 +6,7 @@ html, body, main {
     font-family: "Helvetica";
     font-size: 16px;
     min-width: 600px;
-    min-height: 2000px;
+    min-height: 2100px;
 
     background-image: linear-gradient(to bottom right, rgba(0, 200, 255, 0.082), rgba(0, 255, 42, 0.021));
 }
@@ -38,6 +38,7 @@ a {
     background-color: white;
 
     border: 1px solid #cdcecf;
+    box-shadow: 1px 1px 50px 1px #e7e7e7;
 }
 
 /* Daily Forecasts */
@@ -45,12 +46,10 @@ a {
     margin: 0px;
     width: 100%;
     height: 100%;
-
-    border: 1px solid #cdcecf;
 }
 
 #daily-location {
-    margin-top: 35px;
+    margin-top: 40px;
     margin-bottom: 15px;
     text-align: center;
     font-size: 40px;
@@ -74,6 +73,7 @@ a {
     margin: 15px 0px;
     text-align: center;
     font-size: 30px;
+    color: rgb(85, 85, 85);
 }
 #daily-metrics {
     margin: 15px 40px;
@@ -86,17 +86,17 @@ a {
 .daily-days-container {
     display: flex;
     width: 100%;
-
-    border: 1px solid #cdcecf;
+    font-size: 18px;
 }
 .daily-days {
     width: 20%;
-
     display: flex;
     flex-flow: row wrap;
-    padding: 10px;
-
-    border: 1px solid #cdcecf;
+    padding: 30px 10px;
+    background-color: #E0E0E0;
+}
+.daily-days:hover {
+    background-color: #F5F5F5;
 }
 .daily-day {
     width: 100%;
@@ -132,18 +132,19 @@ a {
 /* Hour Container */
 .hour-panel-container {
     margin: 0px;
-    padding: 1%;
+    padding: 20px 0px;
     width: 100%;
     font-size: 20px;
-
-    border: 1px solid #cdcecf;
 }
 .hour-panel {
     display: flex;
-    padding: 15px;
+    margin: 5px;
+    padding: 25px 10px;
     transition: all 200ms;
+    text-align: center;
 
-    border: 1px solid #cdcecf;
+    /* border: 1px solid #cdcecf; */
+    box-shadow: 1px 1px 50px 1px #ebebeb;
 }
 .hour-panel:hover {
     transform: scale(1.05);
@@ -159,22 +160,21 @@ a {
 /* Weather Panels */
 /* Panel Container */
 .panel-container {
-    margin: 0px;
-    padding: 1%;
-
-    border: 1px solid #cdcecf;
+    margin: 5px;
+    /* padding-bottom: 25px; */
 }
 /* Panel */
 .panel {
     height: auto;
     margin: 0px;
-    padding: 0px;
+    padding: 20px 10px;
     background-color: white;
     word-wrap: break-word;
     overflow: hidden;
-    border: 1px solid #cdcecf;
     border-radius: 1px;
     transition: all 200ms;
+    border: 1px solid #cdcecf;
+    box-shadow: 1px 1px 50px 1px #e7e7e7;
 
     display: flex;
     align-items: center; /* Vertical center alignment */
@@ -197,13 +197,30 @@ a {
     font-weight: bold;
     width: 100%;
     display: flex;
-    /* flex-direction: column; */
 }
 .panel-info div {
-    display:flex;
+    display: flex;
     align-items: center; /* Vertical center alignment */
     justify-content: center; /* Horizontal center alignment */
     width: 100%;
+}
+.panel.clouds {
+    background-color: #B3E5FC;
+}
+.panel.rain{
+    background-color: #2196F3;
+}
+.panel.snow{
+    background-color: #84FFFF;
+}
+.panel.wind {
+    background-color: #9C27B0;
+}
+.panel.humidity {
+    background-color: #4CAF50;
+}
+.panel.pressure {
+    background-color: #F44336;
 }
 
 /* Footer */
