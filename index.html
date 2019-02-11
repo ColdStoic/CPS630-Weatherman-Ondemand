@@ -3,21 +3,23 @@
     <head>
         <meta charset="UTF-8"> 
         <title>CPS630 - Lab 2</title>
-        <link href="assets/css/styles.css" rel="stylesheet" type="text/css">
+        <!-- <link href="assets/css/styles.css" rel="stylesheet" type="text/css"> -->
     </head>
 
     <body>
         <main>
         <div class="container">
-            <div class=".container-main">
-                <h1>WeatherMan OnDemand</h1>
-                <input type="search" id="search-location" placeholder="Enter a city name">
+            <div class="container-main">
+                <h1>The<br/>WeatherMan OnDemand</h1>
+                <input type="search" id="location-name" placeholder="Enter a city name">
+                <input type="radio" name="unit" value="metric" class="form-radio" checked><label for="radio-one">C</label>
+                <input type="radio" name="unit" value="Imperial" class="form-radio"><label for="radio-one">F</label>
                 <button onclick="searchHandler()">Search</button>
                 <p id="text-output"></p>
             </div>
         </div>
         </main>
-        <script type="text/javascript" src="assets/js/city-list.js"></script>
+        <!-- <script type="text/javascript" src="assets/js/city-list.js"></script> -->
         <script type="text/javascript" src="assets/js/index.js"></script>
     </body>
 </html>

@@ -10,27 +10,26 @@ var date = new Date();
 var days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
 var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
 
-var xmlhttp1 = new XMLHttpRequest();
-var xmlhttp2 = new XMLHttpRequest();
-
 // Onload.
 document.addEventListener("DOMContentLoaded", function(event) {
-    //document.getElementById("text-output").innerHTML = localStorage.getItem("location");
     locationName = localStorage.getItem("locationName");
-    locationName = "Toronto, Ca";
-    unit = "metric"
+    unit = localStorage.getItem("unit");
+
+    if (!locationName) {
+        locationName = "Toronto, Ca";
+        unit = "metric"
+    } 
 
     callAPIs();
 });
 
 function callAPIs() {
+    var xmlhttp1 = new XMLHttpRequest();
+    var xmlhttp2 = new XMLHttpRequest();
     var jsonURL = "";
 
     // fires when response is recieved.
     xmlhttp1.onreadystatechange = function() {
-        console.log("called");
-        console.log(xmlhttp1.readyState);
-        console.log("status", xmlhttp1.status);
         if (xmlhttp1.readyState == 4 && xmlhttp1.status == 200) {
             jsonWeather = JSON.parse(xmlhttp1.responseText);
             if (jsonForecast != null) {
@@ -49,9 +48,7 @@ function callAPIs() {
         }  
     }
     
-    
     jsonURL = "https://api.openweathermap.org/data/2.5/weather?q=" + locationName + "&units=" + unit + "&APPID=4c06bfe661f0b300a0f60bc62534ad7d";
-    console.log(jsonURL);
     
     // Api call.
     xmlhttp1.open("GET", jsonURL, true);
@@ -68,6 +65,14 @@ function onCallsReady() {
     setDailyDays();
     setWeather(0);
 
+    var unitLetter = "";
+    if (unit == "metric") {
+        unitLetter = "F";
+    } else {
+        unitLetter = "C";
+    }
+    document.getElementById("daily-metrics").innerHTML = "Switch to " + unitLetter;
+
     console.log("Json Weather", jsonWeather);
     console.log("Json Forecast", jsonForecast);
     console.log("Daily", fiveDayDaily);
@@ -80,15 +85,11 @@ function switchMetrics() {
     fiveDayDaily = [];
     fiveDayForcast = [];
 
-    console.log("CYKA");
     if (unit == "metric") {
         unit = "Imperial";
     } else {
         unit = "metric";
     }
-
-    console.log(unit);
-    console.log(locationName);
 
     callAPIs();
 }
@@ -195,24 +196,31 @@ function getWeatherIcon(id) {
 }
 
 function setWeather(day) {
+    var unitLetter = "";
+    if (unit == "metric") {
+        unitLetter = "C";
+    } else {
+        unitLetter = "F";
+    }
+
     if (day == 0) {
         /* Daily Main */
         document.getElementById("daily-location").innerHTML = jsonWeather.name;
         document.getElementById("daily-icon").innerHTML = '<i id="daily-icon" class="wi ' + getWeatherIcon(jsonWeather.weather[0].id)  + '"></i>';
-        document.getElementById("daily-temp").innerHTML = jsonWeather.main.temp + '°C';
+        document.getElementById("daily-temp").innerHTML = jsonWeather.main.temp + '°' + unitLetter;
         document.getElementById("daily-desc").innerHTML = toUpperFirst(jsonWeather.weather[0].description);
         document.getElementById("daily-date").innerHTML = getDateString(jsonWeather.dt);
 
         /* Hour Panels */
         var hourPanels = document.getElementsByClassName("hour-panel");
         for(i = 0; i < 8; i++) {
-            if (fiveDayForcast[2][i]) {
+            if (fiveDayForcast[day][i]) {
                 if (fiveDayForcast[day][i]) {
                     hourPanels[i].style.display = "flex";
                     hourPanels[i].getElementsByClassName("hour-panel-time")[0].innerHTML = getTime(fiveDayForcast[day][i].dt) + ":00";
                     hourPanels[i].getElementsByClassName("hour-panel-icon")[0].innerHTML = '<i class="wi ' + getWeatherIcon(fiveDayForcast[day][i].weather[0].id) + '"></i>';
                     hourPanels[i].getElementsByClassName("hour-panel-desc")[0].innerHTML = fiveDayForcast[day][i].weather[0].description;
-                    hourPanels[i].getElementsByClassName("hour-panel-temp")[0].innerHTML = fiveDayForcast[day][i].main.temp + '°C';
+                    hourPanels[i].getElementsByClassName("hour-panel-temp")[0].innerHTML = fiveDayForcast[day][i].main.temp + '°' + unitLetter;
                 } else {
                     hourPanels[i].style.display = "none";
                 }
@@ -222,7 +230,7 @@ function setWeather(day) {
         }
 
         /* Panels */
-        document.getElementById("panel-clouds").innerHTML = jsonWeather.clouds.all;
+        document.getElementById("panel-clouds").innerHTML = jsonWeather.clouds.all + "%";
         if (jsonWeather.hasOwnProperty('rain')) {
             document.getElementById("panel-rain").innerHTML = jsonWeather.rain.myObject["1h"] + "mm";
         } else {
@@ -240,7 +248,7 @@ function setWeather(day) {
     } else {
         /* Daily Main */
         document.getElementById("daily-icon").innerHTML = '<i id="daily-icon" class="wi ' + getWeatherIcon(jsonWeather.weather[0].id)  + '"></i>';
-        document.getElementById("daily-temp").innerHTML = fiveDayForcast[day][0].main.temp + '°C';
+        document.getElementById("daily-temp").innerHTML = fiveDayForcast[day][0].main.temp + '°' + unitLetter;
         document.getElementById("daily-desc").innerHTML = toUpperFirst(fiveDayForcast[day][0].weather[0].description);
         document.getElementById("daily-date").innerHTML = getDateString(fiveDayForcast[day][0].dt);
 
@@ -252,14 +260,14 @@ function setWeather(day) {
                 hourPanels[i].getElementsByClassName("hour-panel-time")[0].innerHTML = getTime(fiveDayForcast[day][i].dt) + ":00";
                 hourPanels[i].getElementsByClassName("hour-panel-icon")[0].innerHTML = '<i class="wi ' + getWeatherIcon(fiveDayForcast[2][i].weather[0].id) + '"></i>';
                 hourPanels[i].getElementsByClassName("hour-panel-desc")[0].innerHTML = fiveDayForcast[day][i].weather[0].description;
-                hourPanels[i].getElementsByClassName("hour-panel-temp")[0].innerHTML = fiveDayForcast[day][i].main.temp + '°C';
+                hourPanels[i].getElementsByClassName("hour-panel-temp")[0].innerHTML = fiveDayForcast[day][i].main.temp + '°' + unitLetter;
             } else {
                 hourPanels[i].style.display = "none";
             }
         }
 
         /* Panels */
-        document.getElementById("panel-clouds").innerHTML = fiveDayForcast[day][0].clouds.all;
+        document.getElementById("panel-clouds").innerHTML = fiveDayForcast[day][0].clouds.all + "%";
         if (fiveDayForcast[day][0].hasOwnProperty('rain')) {
             document.getElementById("panel-rain").innerHTML = fiveDayForcast[day][0].rain["3h"] + "mm";
         } else {
