@@ -9,6 +9,11 @@ html, body, main {
     min-height: 2000px;
 }
 
+a {
+    text-decoration: none;
+    color: black;
+}
+
 /* Main Container */
 .container {
     display: flex;
