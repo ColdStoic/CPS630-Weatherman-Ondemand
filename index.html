@@ -4,25 +4,30 @@
         <meta charset="UTF-8"> 
         <title>CPS630 - Lab 2</title>
         <link href="assets/css/index.css" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     </head>
 
     <body>
         <main>
-        <div class="container">
-            <div class="container-main">
-                <h1>The<br/>Weatherman Ondemand</h1>
-                <input type="search" id="location-name" placeholder="Toronto, CA">
-                <div class="break"></div>
-                <div>
-                    <input type="radio" name="unit" value="metric" class="form-radio" checked><label for="radio-one"><strong>C</strong></label>
-                    <input type="radio" name="unit" value="Imperial" class="form-radio"><label for="radio-one"><strong>F</strong></label>
+            <div class="container">
+                <div class="container-main">
+                    <h1>The<br/>Weatherman Ondemand</h1>
+
+                    <input type="search" id="location-name" placeholder="Enter a City Name. Eg. Toronto, CA">
+
+                    <div class="unit-radio-container">
+                        <div>
+                            <input type="radio" name="unit" value="metric" class="unit-radio" checked>C
+                        </div>
+                        <div>
+                            <input type="radio" name="unit" value="Imperial" class="unit-radio">F
+                        </div>
+                    </div>
+
+                    <button id="search" onclick="searchHandler()">Search</button>
                 </div>
-                <div class="break"></div>
-                <button id="search" onclick="searchHandler()">Search</button>
             </div>
-        </div>
         </main>
-        <!-- <script type="text/javascript" src="assets/js/city-list.js"></script> -->
         <script type="text/javascript" src="assets/js/index.js"></script>
     </body>
 </html>
