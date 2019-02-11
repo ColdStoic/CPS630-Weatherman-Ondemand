@@ -37,15 +37,15 @@ document.addEventListener("DOMContentLoaded", function(event) {
     }
 
     //document.getElementById("text-output").innerHTML = localStorage.getItem("location");
-    var LocationId = localStorage.getItem("locationId");
-    LocationId = "6167865";
-    jsonURL = getWeatherApiUrl(LocationId, "metric");
+    var LocationName = localStorage.getItem("locationName");
+    LocationName = "Toronto, Ca";
+    jsonURL = getWeatherApiUrl(LocationName, "metric");
     
     // Api call.
     xmlhttp1.open("GET", jsonURL, true);
     xmlhttp1.send();
 
-    jsonURL = getForecastApiUrl(LocationId, "metric");
+    jsonURL = getForecastApiUrl(LocationName, "metric");
     
     // Api call.
     xmlhttp2.open("GET", jsonURL, true);
@@ -53,11 +53,11 @@ document.addEventListener("DOMContentLoaded", function(event) {
 });
 
 // API Calls.
-function getForecastApiUrl(id, unit) {
-    return "https://api.openweathermap.org/data/2.5/forecast?id=" + id + "&units=" + unit + "&APPID=4c06bfe661f0b300a0f60bc62534ad7d";
+function getForecastApiUrl(name, unit) {
+    return "https://api.openweathermap.org/data/2.5/forecast?q=" + name + "&units=" + unit + "&APPID=4c06bfe661f0b300a0f60bc62534ad7d";
 }
-function getWeatherApiUrl(id, unit) {
-    return "https://api.openweathermap.org/data/2.5/weather?id=" + id + "&units=" + unit + "&APPID=4c06bfe661f0b300a0f60bc62534ad7d";
+function getWeatherApiUrl(name, unit) {
+    return "https://api.openweathermap.org/data/2.5/weather?q=" + name + "&units=" + unit + "&APPID=4c06bfe661f0b300a0f60bc62534ad7d";
 }
 function onCallsReady() {
     getWeather();
@@ -68,6 +68,22 @@ function onCallsReady() {
     document.getElementById("daily-temp").innerHTML = jsonWeather.main.temp + '<i class="wi wi-celsius"></i>';
     document.getElementById("daily-desc").innerHTML = toUpperFirst(jsonWeather.weather[0].description);
     document.getElementById("daily-date").innerHTML = getDateString(jsonWeather.dt);
+
+    /* Hour Panels */
+    var hourPanels = document.getElementsByClassName("hour-panel");
+    console.log(hourPanels)
+    for(i = 0; i < 8; i++) {
+        /* console.log("TEST", fiveDayForcast[1][i]); */
+        if (fiveDayForcast[1][i]) {
+            hourPanels[i].style.display = "flex";
+            hourPanels[i].getElementsByClassName("hour-panel-time")[0].innerHTML = "Hello";
+            hourPanels[i].getElementsByClassName("hour-panel-icon")[0].innerHTML = "Hello";
+            hourPanels[i].getElementsByClassName("hour-panel-desc")[0].innerHTML = "Hello";
+            hourPanels[i].getElementsByClassName("hour-panel-temp")[0].innerHTML = "Hello";
+        } else {
+            hourPanels[i].style.display = "none";
+        }
+    }
 
     /* Panels */
     document.getElementById("panel-clouds").innerHTML = jsonWeather.clouds.all;

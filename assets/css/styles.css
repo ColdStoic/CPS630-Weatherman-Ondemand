@@ -6,7 +6,7 @@ html, body, main {
     font-family: "Helvetica";
     font-size: 16px;
     min-width: 600px;
-    min-height: 800px;
+    min-height: 2000px;
 }
 
 /* Main Container */
@@ -113,6 +113,30 @@ html, body, main {
     align-items: center; /* align vertical */
 }
 
+/* Hour Panels */
+/* Hour Container */
+.hour-panel-container {
+    margin: 0px;
+    padding: 1%;
+    width: 100%;
+
+    border: 1px solid #cdcecf;
+}
+.hour-panel {
+    display: flex;
+    padding: 15px;
+
+    border: 1px solid #cdcecf;
+}
+.hour-panel div {
+    display:flex;
+    align-items: center; /* Vertical center alignment */
+    justify-content: center; /* Horizontal center alignment */
+    width: 100%;
+}
+
+
+/* Weather Panels */
 /* Panel Container */
 .panel-container {
     margin: 0px;
