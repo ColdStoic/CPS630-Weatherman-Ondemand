@@ -71,6 +71,12 @@ a {
     text-align: center;
     font-size: 30px;
 }
+#daily-metrics {
+    margin: 15px 40px;
+    display: flex;
+    justify-content: right;
+    font-size: 20px;
+}
 
 /* Daily Days (5 day) Panels */
 .daily-days-container {
@@ -124,6 +130,7 @@ a {
     margin: 0px;
     padding: 1%;
     width: 100%;
+    font-size: 20px;
 
     border: 1px solid #cdcecf;
 }
