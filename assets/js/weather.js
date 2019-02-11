@@ -65,21 +65,20 @@ function onCallsReady() {
 
     /* Daily Main */
     document.getElementById("daily-location").innerHTML = jsonWeather.name;
-    document.getElementById("daily-temp").innerHTML = jsonWeather.main.temp + '<i class="wi wi-celsius"></i>';
+    document.getElementById("daily-temp").innerHTML = jsonWeather.main.temp + '°C';
     document.getElementById("daily-desc").innerHTML = toUpperFirst(jsonWeather.weather[0].description);
     document.getElementById("daily-date").innerHTML = getDateString(jsonWeather.dt);
 
     /* Hour Panels */
     var hourPanels = document.getElementsByClassName("hour-panel");
-    console.log(hourPanels)
     for(i = 0; i < 8; i++) {
         /* console.log("TEST", fiveDayForcast[1][i]); */
         if (fiveDayForcast[1][i]) {
             hourPanels[i].style.display = "flex";
-            hourPanels[i].getElementsByClassName("hour-panel-time")[0].innerHTML = "Hello";
-            hourPanels[i].getElementsByClassName("hour-panel-icon")[0].innerHTML = "Hello";
-            hourPanels[i].getElementsByClassName("hour-panel-desc")[0].innerHTML = "Hello";
-            hourPanels[i].getElementsByClassName("hour-panel-temp")[0].innerHTML = "Hello";
+            hourPanels[i].getElementsByClassName("hour-panel-time")[0].innerHTML = getTime(fiveDayForcast[1][i].dt) + ":00";
+            hourPanels[i].getElementsByClassName("hour-panel-icon")[0].innerHTML = '<i class="wi wi-day-sunny"></i>';
+            hourPanels[i].getElementsByClassName("hour-panel-desc")[0].innerHTML = fiveDayForcast[1][i].weather[0].description;
+            hourPanels[i].getElementsByClassName("hour-panel-temp")[0].innerHTML = fiveDayForcast[1][i].main.temp + '°C';
         } else {
             hourPanels[i].style.display = "none";
         }
@@ -117,17 +116,15 @@ function getWeather() {
     var day = date.getDate()
 
     for (i = day; i < (day + 5); i++) {
-        var dateString = "2019-02-" + (('0' + i).slice(-2));
-        // console.log(dateString);
         fiveDayDaily.push(forecast.filter(
             function(forecast) {
-                return forecast.dt_txt.includes(dateString)
+                return (getDate(forecast.dt) == i)
             }
         )[0]);
         
         fiveDayForcast.push(forecast.filter(
             function(forecast) {
-                return forecast.dt_txt.includes(dateString)
+                return (getDate(forecast.dt) == i)
             }
         ));
     }
@@ -150,6 +147,7 @@ function setDaily() {
 
 function getDateString(timestamp) {
     var dateObj = new Date(timestamp*1000)
+    dateObj.setTime( dateObj.getTime() + dateObj.getTimezoneOffset()*60*1000 );
     var day = dateObj.getDate();
     var month = months[dateObj.getMonth()];
     var year = dateObj.getFullYear();
@@ -160,9 +158,26 @@ function getDateString(timestamp) {
 
 function getWeekday(timestamp) {
     var dateObj = new Date(timestamp*1000)
+    dateObj.setTime( dateObj.getTime() + dateObj.getTimezoneOffset()*60*1000 );
     var day = days[dateObj.getDay()];
 
     return day
+}
+
+function getDate(timestamp) {
+    var dateObj = new Date(timestamp*1000)
+    dateObj.setTime( dateObj.getTime() + dateObj.getTimezoneOffset()*60*1000 );
+    var date = dateObj.getDate();
+
+    return date
+}
+
+function getTime(timestamp) {
+    var dateObj = new Date(timestamp*1000)
+    dateObj.setTime( dateObj.getTime() + dateObj.getTimezoneOffset()*60*1000 );
+    var hour = dateObj.getHours();
+
+    return hour
 }
 
 // Upper First.
