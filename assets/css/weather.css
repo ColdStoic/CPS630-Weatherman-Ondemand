@@ -94,6 +94,7 @@ a {
     flex-flow: row wrap;
     padding: 30px 10px;
     background-color: #E0E0E0;
+    box-shadow: 1px 1px 50px 1px #E0E0E0;
 }
 .daily-days:hover {
     background-color: #F5F5F5;
