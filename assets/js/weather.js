@@ -20,8 +20,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
     if (!locationName) {
         locationName = "Toronto, Ca";
         unit = "metric"
-    } 
+    }
 
+    document.title = "Weatherman Ondemand - " + locationName;
     callAPIs();
 });
 
